@@ -2,7 +2,7 @@
 
 require_relative "licensegen/version"
 
-module Licensegen
+module LicenseGen
   class Error < StandardError; end
   # Your code goes here...
 end

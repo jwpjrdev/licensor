@@ -2,12 +2,13 @@
 
 require "test_helper"
 
-class TestLicensegen < Minitest::Test
+class TestLicenseGen < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::Licensegen::VERSION
+    refute_nil ::LicenseGen::VERSION
   end
 
-  def test_it_does_something_useful
-    assert false
-  end
+  # TODO: write some tests
+  # def test_it_does_something_useful
+  #   assert false
+  # end
 end
