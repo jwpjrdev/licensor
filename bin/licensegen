@@ -1,0 +1,65 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# rubocop: disable all
+
+require "bundler/setup"
+require "licensegen"
+require "thor"
+require "licensee"
+
+class CLI < Thor
+  # todo: sanatise input
+
+  option :verbose, :aliases => "-v"
+  option :author, :aliases => "-a"
+  option :output, :aliases => "-o"
+  desc "gen LICENSE", "Generate a license file"
+  def generate(license_key)
+    license = self.match_license(license_key)
+    if license == nil
+      puts "The provided license was not found"
+      return
+    end
+
+    if options[:output]
+      self.create_file(license, options[:output])
+    else
+      self.create_file(license)
+    end
+  end
+
+  no_commands do
+    def match_license(license_name)
+      Licensee.licenses.each do |license|
+        return license if license.key == license_name
+      end
+      nil
+    end
+
+    def create_file(license, output = "LICENSE")
+      if File.file?(output)
+        puts "The current directory already has a file named #{output}"
+        return
+      end
+
+      File.write(output, "todo")
+
+      puts "#{output}!!"
+    end
+  end
+
+  default_task :generate
+end
+
+CLI.start(ARGV)
+
+# def generate_license() end
+
+# Licensee.licenses.each do |license|
+#   puts "#{license.key} | #{license.name}"
+# end
+
+# puts "--------"
+
+# puts_license("mit")

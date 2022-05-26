@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
 require_relative "licensegen/version"
-require_relative "licensegen/fetcher"
+# require_relative "licensegen/fetcher"
 
+# main entry point for licensegen's command line interface
 module LicenseGen
   class Error < StandardError; end
+end
 
-  fetcher = LicenseFetcher.new
-  puts fetcher.match_license("mit")
-  puts fetcher.match_license("gpl-3.0")
-  puts fetcher.match_license("wtfpl")
+def match_license(license_name)
+  Licensee.licenses.each do |license|
+    return license if license.key == license_name
+  end
+  nil
 end

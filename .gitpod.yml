@@ -1,7 +1,5 @@
 tasks:
-  - init: |
-      ./bin/setup
-      rake test
+  - init: ./bin/setup
 
 vscode:
   extensions:

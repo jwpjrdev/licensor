@@ -3,6 +3,7 @@ PATH
   specs:
     LicenseGen (0.1.0)
       licensee
+      thor (~> 1.2)
 
 GEM
   remote: https://rubygems.org/
