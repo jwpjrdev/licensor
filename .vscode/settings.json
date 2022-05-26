@@ -1,0 +1,8 @@
+{
+    "ruby.useLanguageServer": true,
+    "ruby.intellisense": "rubyLocate",
+    "ruby.codeCompletion": "rcodetools",
+    "ruby.lint": {
+        "rubocop": true,
+    },
+}

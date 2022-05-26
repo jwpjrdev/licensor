@@ -1,0 +1,8 @@
+tasks:
+  - init: |
+      ./bin/setup
+      rake test
+
+vscode:
+  extensions:
+    - rebornix.ruby
