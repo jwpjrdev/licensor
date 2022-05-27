@@ -1,32 +1,32 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# rubocop: disable all
-
 require "bundler/setup"
 require "licensegen"
 require "thor"
 require "licensee"
 
+# TODO: find a library that doesn't require a subcommand
 class CLI < Thor
-  # todo: sanatise input
-
   option :verbose, :aliases => "-v"
-  option :author, :aliases => "-a"
+  option :author, :aliases => "-a" # TODO: handle -a "This is a test" vs -a This is a test
   option :output, :aliases => "-o"
   desc "gen LICENSE", "Generate a license file"
   def generate(license_key)
+    # TODO: sanatise input
+    @verbose = options[:verbose]
+    @author = options[:author]
+    @output = options[:output]
+
+    license_key = license_key.downcase
+
     license = self.match_license(license_key)
-    if license == nil
+    if license.nil?
       puts "The provided license was not found"
       return
     end
 
-    if options[:output]
-      self.create_file(license, options[:output])
-    else
-      self.create_file(license)
-    end
+    self.create_file(license, license_key)
   end
 
   no_commands do
@@ -37,29 +37,47 @@ class CLI < Thor
       nil
     end
 
-    def create_file(license, output = "LICENSE")
+    def get_author
+      if @author
+        user = @author
+      else
+        user = `git config user.name` # TODO: test in a container without git installed
+      end
+      user.strip
+    end
+    
+    def create_file(license, license_key)
+      if @output
+        output = @output.strip
+      else
+        output = "LICENSE"
+      end
+
       if File.file?(output)
         puts "The current directory already has a file named #{output}"
         return
       end
 
-      File.write(output, "todo")
+      user = self.get_author
 
-      puts "#{output}!!"
+      # TODO: check for any others & migrate to hashes or files rather than relying on licensee
+      content = license.content
+      if license_key == "mit"
+        content = content
+          .gsub("[year]", Time.now.year.to_s)
+          .gsub("[fullname]", user)
+      elsif license_key == "apache-2.0"
+        content = content
+          .gsub("[yyyy]", Time.now.year.to_s)
+          .gsub("[name of copyright owner]", user)
+      end
+
+      File.write(output, content)
     end
   end
 
-  default_task :generate
+  # default_task :generate
 end
 
 CLI.start(ARGV)
-
-# def generate_license() end
-
-# Licensee.licenses.each do |license|
-#   puts "#{license.key} | #{license.name}"
-# end
-
-# puts "--------"
-
-# puts_license("mit")
+ 
