@@ -1,6 +1,8 @@
 tasks:
-  - init: ./bin/setup
+  - init: |
+      ./bin/setup
 
 vscode:
   extensions:
     - rebornix.ruby
+    - wingrunr21.vscode-ruby

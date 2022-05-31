@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    LicenseGen (0.1.0)
+    Licensor (0.1.0)
       licensee
       thor (~> 1.2)
 
@@ -63,7 +63,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  LicenseGen!
+  Licensor!
   minitest (~> 5.0)
   rake (~> 13.0)
   rubocop (~> 1.21)
