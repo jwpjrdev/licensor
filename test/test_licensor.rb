@@ -2,9 +2,9 @@
 
 require "test_helper"
 
-class TestLicenseGen < Minitest::Test
+class TestLicensor < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::LicenseGen::VERSION
+    refute_nil ::Licensor::VERSION
   end
 
   # TODO: write some tests
