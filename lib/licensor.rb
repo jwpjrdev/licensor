@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "licensegen/version"
-# require_relative "licensegen/fetcher"
+require_relative "licensor/version"
+# require_relative "licensor/fetcher"
 
-# main entry point for licensegen's command line interface
-module LicenseGen
+# main entry point for licensor's command line interface
+module Licensor
   class Error < StandardError; end
 end
 

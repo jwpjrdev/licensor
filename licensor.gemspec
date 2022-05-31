@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require_relative "lib/licensegen/version"
+require_relative "lib/licensor/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "LicenseGen"
-  spec.version = LicenseGen::VERSION
+  spec.name = "Licensor"
+  spec.version = Licensor::VERSION
   spec.authors = ["Joshua Price"]
   spec.email = ["jwpjr567@gmail.com"]
 
   spec.summary = "Quickly generate a project license file"
-  spec.homepage = "https://github.com/jwpjrdev/licensegen"
+  spec.homepage = "https://github.com/jwpjrdev/licensor"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
